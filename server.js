@@ -81,8 +81,27 @@ router.route('/:make')
     }
     else {
       response.json(carMake);
-    }  
+    } 
+  })
+  .delete(function (request, response) {
+    cars  = cars.filter(function (deleteEntry) {
+      return deleteEntry.make !== request.params.make;
+    });
+      // delete deleteMake;
+      //using DELETE to delete file
+      // for(var i in cars) {
+      //   if(cars[i].make === request.params.make){
+      //     if(cache){
+      //     response.send("Already Deleted");
+      //     }
+      //     else {
+      //       var cache = cars.splice([i], 1);          
+      //     }
+      //   }
+      // }
+    response.sendStatus(200);
   });
+
 
 router.route('/:make/edit')
   //using PUT to update file
@@ -109,6 +128,7 @@ router.route('/:make/edit')
     response.status(201).json(editMake);
     
     });
+    
 
 app.use('/', router);
 app.use('/:make', router);
