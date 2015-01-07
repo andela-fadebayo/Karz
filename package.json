@@ -1,0 +1,22 @@
+{
+  "name": "Karz",
+  "description": "Full-Stack Javascript Cars Shop API with MEAN",
+  "version": "1.0.0",
+  "author": "Ladna Meke and Fiyin Adebayo",
+  "main": "server.js",
+  "dependencies": {
+    "express": "latest",
+    "mongoose": "latest",
+    "body-parser": "latest",
+    "method-override": "latest"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andela-fadebayo/Karz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andela-fadebayo/Karz/issues"
+  },
+  "homepage": "https://github.com/andela-fadebayo/Karz"
+}
