@@ -18,6 +18,7 @@ var app = express();
 //cars data available in Karz shop
 var cars = [
              {
+              "id": "1",
               "make": "BMW",
               "model": "X5",
               "year": "2015",
@@ -28,6 +29,7 @@ var cars = [
              },
 
              {
+              "id": "2",
               "make": "Mercedes-Benz",
               "model": "SLS AMG GT Final Edition",
               "year": "2015",
@@ -38,6 +40,7 @@ var cars = [
              },
 
              {
+              "id": "3",
               "make": "Toyota",
               "model": "Avalon",
               "year": "2015",
@@ -103,15 +106,15 @@ router.route('/:make')
   });
 
 
-router.route('/:make/edit')
+router.route('/:id/edit')
   //using PUT to update file
   .put(parseUrlencoded, function (request, response) {
     
     var putBody = request.body;
-    var carEntry = request.params.make;
+    var carId = request.params.id;
 
     for(var i in cars) {
-      if(cars[i].make === carEntry) {
+      if(cars[i].id === carId) {
         cars[i].make = putBody.make;
         cars[i].model = putBody.model;
         cars[i].year = putBody.year;
@@ -123,16 +126,15 @@ router.route('/:make/edit')
       }
     }
     var editMake = cars.filter(function (editEntry) {
-      return editEntry.make === carEntry;
+      return editEntry.id === carId;
     });
     response.status(201).json(editMake);
-    
     });
     
 
 app.use('/', router);
 app.use('/:make', router);
-app.use('/:make/edit', router);
+app.use('/:id/edit', router);
 app.listen(3000, function() {
   console.log("Karz is listening on port 3000");
 });
