@@ -5,6 +5,9 @@ Ladna and Fiyin
 //require express
 var express = require('express');
 
+//require karz mongoose db
+var Cars = require('./../config/db');
+
 //create a new express router instance
 var router = express.Router();
 
@@ -12,48 +15,16 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
-//cars data available in Karz shop
-var cars = [
-             {
-              "id": "1",
-              "make": "BMW",
-              "model": "X5",
-              "year": "2015",
-              "style": "xDrive35d 4dr SUV AWD (3.0L 6cyl Turbodiesel 8A)",
-              "image": "",
-              "colour": "white",
-              "soldout": false
-             },
-
-             {
-              "id": "2",
-              "make": "MERCEDES-BENZ",
-              "model": "SLS AMG GT Final Edition",
-              "year": "2015",
-              "style": "2dr Convertible (6.2L 8cyl 7AM)",
-              "image": "",
-              "colour": "red",
-              "soldout": false
-             },
-
-             {
-              "id": "3",
-              "make": "TOYOTA",
-              "model": "Avalon",
-              "year": "2015",
-              "style": "XLE Touring SE 4dr Sedan (3.5L 6cyl 6A)",
-              "image": "",
-              "colour": "grey",
-              "soldout": true
-             }
-           ];
-
 //use the new router instance
 //for root requests
 router.route('/')
   .get(function (request, response) {
     //test with a GET request
-    response.json(cars);
+    //read all cars in cars collection and show on our page
+    Cars.find(function (err, data) {
+      if (err) return console.error(err);
+      response.json(data);
+      });
   })
   .post(parseUrlencoded, function (request, response) {
     //test with a POST request
