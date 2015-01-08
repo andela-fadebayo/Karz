@@ -102,7 +102,7 @@ router.route('/cars/:make')
       // }
     response.sendStatus(200);
   });
-
+  
 
 router.route('/cars/:id/edit')
   //using PUT to update file
@@ -113,7 +113,7 @@ router.route('/cars/:id/edit')
 
     for(var i in cars) {
       if(cars[i].id === carId) {
-        cars[i].make = putBody.make.toUpperCase();
+        // cars[i].make = putBody.make.toUpperCase();
         cars[i].model = putBody.model;
         cars[i].year = putBody.year;
         cars[i].style = putBody.style;
