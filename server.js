@@ -13,7 +13,7 @@ var carsRoutes = require('./routes/cars');
 
 //use this route for cars routes
 app.use('/', carsRoutes);
-app.use('/:make', carsRoutes);
+app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
 
 //listen for server.js on port 3000

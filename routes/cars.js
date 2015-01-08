@@ -27,7 +27,7 @@ var cars = [
 
              {
               "id": "2",
-              "make": "Mercedes-Benz",
+              "make": "MERCEDES-BENZ",
               "model": "SLS AMG GT Final Edition",
               "year": "2015",
               "style": "2dr Convertible (6.2L 8cyl 7AM)",
@@ -38,7 +38,7 @@ var cars = [
 
              {
               "id": "3",
-              "make": "Toyota",
+              "make": "TOYOTA",
               "model": "Avalon",
               "year": "2015",
               "style": "XLE Touring SE 4dr Sedan (3.5L 6cyl 6A)",
@@ -64,13 +64,13 @@ router.route('/')
   });
 
 //route to get cars based on car make
-router.route('/:make')
+router.route('/cars/:make')
 
   //return car info by make using GET
   .get(function (request, response) {
-    console.log(request.params.make);
 
-    var carEntry = request.params.make;
+    var carEntry = parseEntry(request.params.make);
+    console.log("car entry: " + carEntry);
 
     var carMake = cars.filter(function (entry) {
       return entry.make === carEntry;
@@ -85,7 +85,8 @@ router.route('/:make')
   })
   .delete(function (request, response) {
     cars  = cars.filter(function (deleteEntry) {
-      return deleteEntry.make !== request.params.make;
+      var carEntry = parseEntry(request.params.make);
+      return deleteEntry.make !== carEntry;
     });
       // delete deleteMake;
       //using DELETE to delete file
@@ -112,7 +113,7 @@ router.route('/cars/:id/edit')
 
     for(var i in cars) {
       if(cars[i].id === carId) {
-        cars[i].make = putBody.make;
+        cars[i].make = putBody.make.toUpperCase();
         cars[i].model = putBody.model;
         cars[i].year = putBody.year;
         cars[i].style = putBody.style;
@@ -127,6 +128,13 @@ router.route('/cars/:id/edit')
     });
     response.status(201).json(editMake);
     });
+
+//function to change car make input to first letter uppercase
+//and other letters lowercase
+function parseEntry(name) {
+  var parsedEntry = name.toUpperCase();
+  return parsedEntry;
+};
 
 //export cars.js for other files to use
 module.exports = router;
