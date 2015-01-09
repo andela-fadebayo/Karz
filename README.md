@@ -5,7 +5,7 @@ Karz API. Add, View, Edit and Delete cars information in Karz Online Shop. Andel
 
 Get info on cars available in the Karz Shop. You can add cars, update car info, and view cars.
 
-Appliccation is done with Express.js v~4.0.0, and Mongoose v~3.6.13
+Application is done with Express.js v~4.0.0, and Mongoose v~3.6.13
 
 Full source code is available at github.com/andela-fadebayo/Karz.\
 
@@ -31,3 +31,4 @@ Full source code is available at github.com/andela-fadebayo/Karz.\
 
 ###Edit car details
     PUT /cars/:id/edit
+    //work in progress
