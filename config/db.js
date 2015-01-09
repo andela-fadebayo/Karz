@@ -9,8 +9,12 @@ var mongoose = require('mongoose');
 //create Karz schema for our data
 var Schema = mongoose.Schema;
 
-//connect to mongoose
-mongoose.connect('mongodb://localhost/Karz');
+//connect to mongolab db
+var karzURI = 'mongodb://localhost/Karz';
+if(process.env.NODE_ENV === 'production') {
+  karzURI = 'mongodb://fiyin:andela@ds031561.mongolab.com:31561/Karz'; 
+};
+mongoose.connect(karzURI);
 
 //test mongoose connection
 var Karzdb = mongoose.connection;

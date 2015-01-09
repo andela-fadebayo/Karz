@@ -11,6 +11,9 @@ var app = express();
 //require cars route file for use here
 var carsRoutes = require('./routes/cars');
 
+//set port
+var port = process.env.PORT || 5000;
+
 //use this route for cars routes
 app.use('/', carsRoutes);
 app.use('/cars', carsRoutes);
@@ -29,6 +32,6 @@ var allowCrossDomain = function (request, response, next) {
 app.use(allowCrossDomain);
 
 //listen for server.js on port 3000
-app.listen(5000, function() {
+app.listen(port, function() {
   console.log("Karz is listening on port 5000");
 });
