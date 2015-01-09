@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //connect to mongolab
-mongoose.connect('mongodb://fiyin:andela@ds031561.mongolab.com:31561/Karz');
+mongoose.connect('mongodb://fiyin:andela@ds031561.mongolab.com:31561/heroku_app33126721');
 
 //test mongoose connection
 var Karzdb = mongoose.connection;
