@@ -27,11 +27,26 @@ router.route('/')
       });
   })
   .post(parseUrlencoded, function (request, response) {
-    //test with a POST request
-    var newCar = request.body;
-    cars.push(newCar);
+    
+    //grab POST request data
+    var reqBody = request.body;
+    var newCar = new Cars({
+      car_id: reqBody.car_id,
+      make: reqBody.make.toUpperCase(),
+      model: reqBody.model,
+      year: reqBody.year,
+      style: reqBody.style,
+      image: reqBody.image,
+      colour: reqBody.colour,
+      price: reqBody.price,
+      soldout: Boolean(reqBody.soldout)
+    });
 
-    response.status(201).json(newCar);
+    //insert newCar schema into Karz database
+    newCar.save(function (err, newSave) {
+      if (err) return console.error(err);
+      response.status(200).json('new car ' + reqBody.make + ' saved!');
+    });
   });
 
 //route to get cars based on car make
@@ -41,20 +56,23 @@ router.route('/cars/:make')
   .get(function (request, response) {
 
     var carEntry = parseEntry(request.params.make);
-    console.log("car entry: " + carEntry);
 
-    var carMake = cars.filter(function (entry) {
-      return entry.make === carEntry;
-    });
-
-    if(carMake.length === 0) {
-      response.json("No car found with name '" + carEntry + "'");
-    }
-    else {
-      response.json(carMake);
-    } 
+    Cars.find(function (err, data) {
+      if(err) return console.error(err);
+      var carMake = data.filter(function(entry) {
+        return entry.make === carEntry;
+      });
+        if(carMake.length === 0) {
+          response.json("No car found with name '" + carEntry + "'");
+        }
+        else {
+          response.json(carMake);
+        }        
+    });     
   })
-  .delete(function (request, response) {
+
+
+  /*.delete(function (request, response) {
     cars  = cars.filter(function (deleteEntry) {
       var carEntry = parseEntry(request.params.make);
       return deleteEntry.make !== carEntry;
@@ -73,16 +91,16 @@ router.route('/cars/:make')
       // }
     response.sendStatus(200);
   });
-
+*/
 
 router.route('/cars/:id/edit')
   //using PUT to update file
   .put(parseUrlencoded, function (request, response) {
     
     var putBody = request.body;
-    var carId = request.params.id;
+    var carId = request.params.car_id;
 
-    for(var i in cars) {
+    /*for(var i in cars) {
       if(cars[i].id === carId) {
         cars[i].make = putBody.make.toUpperCase();
         cars[i].model = putBody.model;
@@ -98,6 +116,12 @@ router.route('/cars/:id/edit')
       return editEntry.id === carId;
     });
     response.status(201).json(editMake);
+
+    Cars.find({ car_id: carId }, function (err, newId) {
+      if (err) return console.error(err);
+      
+    });*/
+
     });
 
 //function to change car make input to first letter uppercase
