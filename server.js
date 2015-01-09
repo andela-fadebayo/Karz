@@ -29,6 +29,6 @@ var allowCrossDomain = function (request, response, next) {
 app.use(allowCrossDomain);
 
 //listen for server.js on port 3000
-app.listen(3000, function() {
-  console.log("Karz is listening on port 3000");
+app.listen(5000, function() {
+  console.log("Karz is listening on port 5000");
 });
