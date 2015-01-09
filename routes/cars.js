@@ -102,8 +102,24 @@ router.route('/cars/:id/edit')
   //using PUT to update file
   .put(parseUrlencoded, function (request, response) {
     
-    var putBody = request.body;
     var carId = request.params.id;
+    var putBody = request.body;
+
+    Cars.findById(carId).exec(function (err, editCar) {
+          // editCar.car_id = editCar.car_id;
+          editCar.make = putBody.make.toUpperCase() || editCar.make;
+          editCar.model = putBody.model || editCar.model;
+          editCar.year = putBody.year || editCar.year;
+          editCar.style = putBody.style || editCar.style;
+          editCar.image = putBody.image || editCar.image;
+          editCar.colour = putBody.colour || editCar.colour;
+          editCar.price = putBody.price || editCar.price;
+          editCar.soldout = Boolean(putBody.soldout) || editCar.soldout;
+
+          //save the edited copy
+          editCar.save();
+          sendResponse(response, 200, editCar);
+        });
 
     // for(var i in cars) {
     //   if(cars[i].id === carId) {
@@ -122,23 +138,15 @@ router.route('/cars/:id/edit')
     // });
     // response.status(201).json(editMake);
 
-    Cars.find({ car_id: carId }, function (err, newId) {
-      if (err) return console.error(err);
-      response.json(newId);
-/*
-      var carUpdate = new Cars({
-      car_id: reqBody.car_id,
-      make: reqBody.make.toUpperCase(),
-      model: reqBody.model,
-      year: reqBody.year,
-      style: reqBody.style,
-      image: reqBody.image,
-      colour: reqBody.colour,
-      price: reqBody.price,
-      soldout: Boolean(reqBody.soldout)
-    });*/
+//     Cars.find({ car_id: carId }, function (err, newId) {
+//       if (err) return console.error(err);
+//       response.json(newId);
+// /*
+//       var carUpdate = new Cars({
       
-    });
+//     });*/
+      
+//     });
 
     });
 
