@@ -15,6 +15,24 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
+
+// var ferrariEnzo = new Cars({
+//  make: 'FERRARI',
+//  model: 'Enzo',
+//  year: 2003,
+//  style: '2dr Coupe (6.0L 12cyl 6AM)',
+//  image: 'http://media.ed.edmunds-media.com/ferrari/enzo/2003/oem/2003_ferrari_enzo_coupe_base_detail_oem_1_423.jpg',
+//  colour: 'red',
+//  price: 643330,
+//  soldout: false
+// });
+
+ferrariEnzo.save(function (err, enzo) {
+ if (err) return console.error(err);
+ console.log("Ferrari Enzo saved successful!");
+});
+
+
 //use the new router instance
 //for root requests
 router.route('/')
