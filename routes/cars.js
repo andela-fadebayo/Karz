@@ -49,6 +49,11 @@ router.route('/')
     });
   });
 
+router.route('/cars')
+
+.get(function (request, response) {
+  response.redirect('/');
+});
 //route to get cars based on car make
 router.route('/cars/:make')
 
@@ -98,29 +103,42 @@ router.route('/cars/:id/edit')
   .put(parseUrlencoded, function (request, response) {
     
     var putBody = request.body;
-    var carId = request.params.car_id;
+    var carId = request.params.id;
 
-    /*for(var i in cars) {
-      if(cars[i].id === carId) {
-        // cars[i].make = putBody.make.toUpperCase();
-        cars[i].model = putBody.model;
-        cars[i].year = putBody.year;
-        cars[i].style = putBody.style;
-        cars[i].image = putBody.image;
-        cars[i].colour = putBody.colour;
-        cars[i].soldout = Boolean(putBody.soldout);
-        break;
-      }
-    }
-    var editMake = cars.filter(function (editEntry) {
-      return editEntry.id === carId;
-    });
-    response.status(201).json(editMake);
+    // for(var i in cars) {
+    //   if(cars[i].id === carId) {
+    //     // cars[i].make = putBody.make.toUpperCase();
+    //     cars[i].model = putBody.model;
+    //     cars[i].year = putBody.year;
+    //     cars[i].style = putBody.style;
+    //     cars[i].image = putBody.image;
+    //     cars[i].colour = putBody.colour;
+    //     cars[i].soldout = Boolean(putBody.soldout);
+    //     break;
+    //   }
+    // }
+    // var editMake = cars.filter(function (editEntry) {
+    //   return editEntry.id === carId;
+    // });
+    // response.status(201).json(editMake);
 
     Cars.find({ car_id: carId }, function (err, newId) {
       if (err) return console.error(err);
-      
+      response.json(newId);
+/*
+      var carUpdate = new Cars({
+      car_id: reqBody.car_id,
+      make: reqBody.make.toUpperCase(),
+      model: reqBody.model,
+      year: reqBody.year,
+      style: reqBody.style,
+      image: reqBody.image,
+      colour: reqBody.colour,
+      price: reqBody.price,
+      soldout: Boolean(reqBody.soldout)
     });*/
+      
+    });
 
     });
 

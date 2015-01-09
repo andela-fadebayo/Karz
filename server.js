@@ -13,6 +13,7 @@ var carsRoutes = require('./routes/cars');
 
 //use this route for cars routes
 app.use('/', carsRoutes);
+app.use('/cars', carsRoutes);
 app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
 
