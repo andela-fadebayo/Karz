@@ -26,12 +26,12 @@ router.route('/')
       response.json(data);
       });
   })
+
   .post(parseUrlencoded, function (request, response) {
     
     //grab POST request data
     var reqBody = request.body;
     var newCar = new Cars({
-      car_id: reqBody.car_id,
       make: reqBody.make.toUpperCase(),
       model: reqBody.model,
       year: reqBody.year,
@@ -50,14 +50,12 @@ router.route('/')
   });
 
 router.route('/cars')
-
 .get(function (request, response) {
   response.redirect('/');
 });
+
 //route to get cars based on car make
 router.route('/cars/:make')
-
-  //return car info by make using GET
   .get(function (request, response) {
 
     var carEntry = parseEntry(request.params.make);
@@ -76,79 +74,43 @@ router.route('/cars/:make')
     });     
   })
 
-
-  /*.delete(function (request, response) {
-    cars  = cars.filter(function (deleteEntry) {
-      var carEntry = parseEntry(request.params.make);
-      return deleteEntry.make !== carEntry;
-    });
-      // delete deleteMake;
-      //using DELETE to delete file
-      // for(var i in cars) {
-      //   if(cars[i].make === request.params.make){
-      //     if(cache){
-      //     response.send("Already Deleted");
-      //     }
-      //     else {
-      //       var cache = cars.splice([i], 1);          
-      //     }
-      //   }
-      // }
-    response.sendStatus(200);
-  });
-*/
-
 router.route('/cars/:id/edit')
   //using PUT to update file
   .put(parseUrlencoded, function (request, response) {
-    
-    var carId = request.params.id;
+
     var putBody = request.body;
 
-    Cars.findById(carId).exec(function (err, editCar) {
-          // editCar.car_id = editCar.car_id;
-          editCar.make = putBody.make.toUpperCase() || editCar.make;
-          editCar.model = putBody.model || editCar.model;
-          editCar.year = putBody.year || editCar.year;
-          editCar.style = putBody.style || editCar.style;
-          editCar.image = putBody.image || editCar.image;
-          editCar.colour = putBody.colour || editCar.colour;
-          editCar.price = putBody.price || editCar.price;
-          editCar.soldout = Boolean(putBody.soldout) || editCar.soldout;
+    Cars.findById(request.params.id, function (err, kar) {
+      
+      if (err) {
+        response.send(err);
+      }
+      else {
+        kar.make = kar.make || request.body.make.toUpperCase();
+        kar.model = putBody.model || kar.model;
+        kar.year = putBody.year || kar.year;
+        kar.style = putBody.style || kar.style;
+        kar.image = putBody.image || kar.image;
+        kar.colour = putBody.colour || kar.colour;
+        kar.price = putBody.price || kar.price;
+        kar.soldout = Boolean(putBody.soldout) || kar.soldout;
 
-          //save the edited copy
-          editCar.save();
-          sendResponse(response, 200, editCar);
+        //save the edited copy
+        kar.save(function (err){
+          if (err) response.send(err);
+          response.status(200).json(kar.make + " updated!");
         });
-
-    // for(var i in cars) {
-    //   if(cars[i].id === carId) {
-    //     // cars[i].make = putBody.make.toUpperCase();
-    //     cars[i].model = putBody.model;
-    //     cars[i].year = putBody.year;
-    //     cars[i].style = putBody.style;
-    //     cars[i].image = putBody.image;
-    //     cars[i].colour = putBody.colour;
-    //     cars[i].soldout = Boolean(putBody.soldout);
-    //     break;
-    //   }
-    // }
-    // var editMake = cars.filter(function (editEntry) {
-    //   return editEntry.id === carId;
-    // });
-    // response.status(201).json(editMake);
-
-//     Cars.find({ car_id: carId }, function (err, newId) {
-//       if (err) return console.error(err);
-//       response.json(newId);
-// /*
-//       var carUpdate = new Cars({
-      
-//     });*/
-      
-//     });
-
+      }
     });
+  });
+
+router.route('/cars/:id')
+   .delete(function (request, response) {
+      Cars.remove({ _id: request.params.id }, function (err, kar) {
+        if (err) response.send(err)
+        response.json({ message: 'Delete Successful!'});
+      });
+  });    
 
 //function to change car make input to first letter uppercase
 //and other letters lowercase

@@ -25,7 +25,6 @@ Karzdb.once('open', function (callback) {
 
 //create a new car Schema
 var karzSchema = new Schema({
-  car_id: Number,
   make: String,
   model: String,
   year: Number,

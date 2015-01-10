@@ -17,6 +17,7 @@ var port = process.env.PORT || 5000;
 //use this route for cars routes
 app.use('/', carsRoutes);
 app.use('/cars', carsRoutes);
+app.use('/cars/:id', carsRoutes);
 app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
 
