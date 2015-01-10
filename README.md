@@ -5,7 +5,7 @@ Karz API. Add, View, Edit and Delete cars information in Karz Online Shop. Andel
 For more information and complaints, contact<br /><br />
 <img src="https://avatars2.githubusercontent.com/u/9654451?v=3&s=200"><br />
 <a href="mailto:fiyinfoluwa.adebayo@andela.co">Fiyin Adebayo</a>
-<br /><br />
+<br /><br /><br />
 <img src="https://avatars2.githubusercontent.com/u/9106885?v=3&s=200"><br />
 <a href="mailto:ladna.meke@andela.co">Ladna Meke</a>
 
@@ -62,9 +62,10 @@ https://andela-karz.herokuapp.com/
         soldout: true/false (required)
     }
 
-###Edit car details
+###Edit car details by id
     method: PUT 
     /cars/id/edit
+    
     parameters: {
         make: a string (required)
         model: a string (required)
