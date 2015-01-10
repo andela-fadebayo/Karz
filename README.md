@@ -28,7 +28,30 @@ Full source code is available at github.com/andela-fadebayo/Karz.\
 
 ###Add car to the cars array
     POST /cars
+    parameters: {
+        car_id: integer (required)
+        make: a string (required)
+        model: a string (required)
+        year: integer (required)
+        style: string (required)
+        image: image url in string form (optional)
+        colour: string (required)
+        price: integer (required)
+        soldout: true/false (required)
+    }
 
 ###Edit car details
     PUT /cars/:id/edit
+    parameters: {
+        car_id: integer (required)
+        make: a string (required)
+        model: a string (required)
+        year: integer (required)
+        style: string (required)
+        image: image url in string form (optional)
+        colour: string (required)
+        price: integer (required)
+        soldout: true/false (required)
+    }
+
     //work in progress
