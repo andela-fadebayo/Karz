@@ -1,35 +1,56 @@
-# Karz
+#KARZ
+
 Karz API. Add, View, Edit and Delete cars information in Karz Online Shop. Andela group API project (Ladna and Fiyin). 7th January, 2015.
+
+For more information and complaints, contact 
+<img src="https://avatars2.githubusercontent.com/u/9654451?v=3&s=200">
+<a href="mailto:fiyinfoluwa.adebayo@andela.co">Fiyin Adebayo</a>
+
+<img src="https://avatars2.githubusercontent.com/u/9106885?v=3&s=200">
+<a href="mailto:ladna.meke@andela.co">Ladna Meke</a>
+
 
 ##KARZ SHOP
 
-Get info on cars available in the Karz Shop. You can add cars, update car info, and view cars.
+This is a description of Karz API.
+
+Get info on cars available in the Karz Shop. You can add, update, view cars and delete cars info.
 
 Application is done with Express.js v~4.0.0, and Mongoose v~3.6.13
 
-Full source code is available at github.com/andela-fadebayo/Karz.\
+##Prerequisites to run Karz API locally on your machine:
+*Clone Karz API from https://github.com/andela-fadebayo/Karz.git
 
-##Prerequisite
 *Make sure you have node installed on your machine. You can get node from https://nodejs.org
 
-*Download Mongo 
+*Download Mongo from http://www.mongodb.org/
 
-*Run npm install to install all dependencied in the package.json
+*Run '$ npm install' to install all dependencies in package.json
 
 *Make sure that mongod is running
 
+*run $ node server.js
+
 
 ##ENDPOINTS
+
+###Root Endpoint
+
+https://andela-karz.herokuapp.com/
+
 ###List all cars:
-  GET /cars
+  method: GET 
+  /cars
 
 ###Get a particular car by make:
-    GET /cars/:make
+    method: GET
+    /cars/make
 
-###Add car to the cars array
-    POST /cars
+###Add car to cars database
+    method: POST
+    /cars
+    
     parameters: {
-        car_id: integer (required)
         make: a string (required)
         model: a string (required)
         year: integer (required)
@@ -41,9 +62,9 @@ Full source code is available at github.com/andela-fadebayo/Karz.\
     }
 
 ###Edit car details
-    PUT /cars/:id/edit
+    method: PUT 
+    /cars/id/edit
     parameters: {
-        car_id: integer (required)
         make: a string (required)
         model: a string (required)
         year: integer (required)
@@ -54,4 +75,8 @@ Full source code is available at github.com/andela-fadebayo/Karz.\
         soldout: true/false (required)
     }
 
-    //work in progress
+###Delete a car by id
+    method: DELETE
+    /cars/id
+
+Good Luck!!!
