@@ -21,13 +21,12 @@ app.use('/cars/:id', carsRoutes);
 app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
 
-//Allow for cross domain and access to others
-var allowCrossDomain = function (request, response, next) {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  response.header('Access-Control-Allow-Headers', 'Authorization' 'Content-Type, Content-Length, X-Requested-With');
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-  // intercept OPTIONS method
+    // intercept OPTIONS method
     if ('OPTIONS' == req.method) {
       res.send(200);
     }
