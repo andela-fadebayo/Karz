@@ -12,8 +12,7 @@ var Schema = mongoose.Schema;
 //connect to mongolab
 var karzURI = 'mongodb://localhost/Karz';
 if (process.env.NODE_ENV === 'production') {
-  // karzURI = 'mongodb://fiyin:andela@ds031561.mongolab.com:31561/heroku_app33126721';
-  karzURI = 'mongodb://heroku_app33126721:u8mjmhkv0ajcbenuj7iaf5qt7c@ds031561.mongolab.com:31561/heroku_app33126721';
+  karzURI = 'mongodb://fiyin:andela@ds031561.mongolab.com:31561/heroku_app33126721';
 };
 mongoose.connect(karzURI);
 
