@@ -22,15 +22,21 @@ app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
 
 //Allow for cross domain and access to others
-/*var allowCrossDomain = function (request, response, next) {
+var allowCrossDomain = function (request, response, next) {
   response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-  response.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, X-Requested-With');
+  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  response.header('Access-Control-Allow-Headers', 'Authorization' 'Content-Type, Content-Length, X-Requested-With');
 
-  next();
+  // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
 };
 
-app.use(allowCrossDomain);*/
+app.use(allowCrossDomain);
 
 //listen for server.js on port 3000
 app.listen(port, function() {
