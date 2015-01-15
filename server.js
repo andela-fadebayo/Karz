@@ -14,23 +14,23 @@ var carsRoutes = require('./routes/cars');
 //set port
 var port = process.env.PORT || 5000;
 
+//Allow for cross domain and access to others
+var allowCrossDomain = function (request, response, next) {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  next();
+};
+
+app.use(allowCrossDomain);
+
 //use this route for cars routes
 app.use('/', carsRoutes);
 app.use('/cars', carsRoutes);
 app.use('/cars/:id', carsRoutes);
 app.use('/cars/:make', carsRoutes);
 app.use('/cars/:id/edit', carsRoutes);
-
-//Allow for cross domain and access to others
-var allowCrossDomain = function (request, response, next) {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  response.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, X-Requested-With');
-
-  next();
-};
-
-app.use(allowCrossDomain);
 
 //listen for server.js on port 3000
 app.listen(port, function() {
